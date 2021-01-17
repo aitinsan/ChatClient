@@ -1,0 +1,27 @@
+syntax = "proto3";
+option csharp_namespace = "ChatClient";
+
+service ChatService {
+	rpc GetChatRooms(Lookup) returns (ChatRooms);
+	rpc JoinAndWriteMessage(stream Message) returns (stream Message);
+	rpc ShowMessageHistory(Lookup) returns (stream Message);
+}
+
+message Message {
+	string id = 3;
+	string user = 1;
+	string text = 2;
+	string chatRoomId = 4;
+}
+message ChatRoom{
+	string id = 2;
+	string Name = 1;
+}
+message ChatRoomJoin{
+	string chatRoomId = 1;
+	string user = 2;
+}
+message ChatRooms{
+	repeated ChatRoom chatRooms = 1;
+}
+message Lookup{}
